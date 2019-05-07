@@ -1,12 +1,12 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await addUsersToPage();
+  const users = await getRandomUsers();
+  await addUsersToPage(users);
   createModal();
 });
 
-async function addUsersToPage() {
-  const users = await getRandomUsers();
+async function addUsersToPage(users) {
   const gallery = document.querySelector("#gallery");
   users.forEach(user => {
     const card = createUserCardElement(user);
