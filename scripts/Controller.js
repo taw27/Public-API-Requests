@@ -45,7 +45,7 @@ class Controller {
   handleCardClick(event) {
     const closestCardAncestor = event.target.closest(".card");
     if (closestCardAncestor) {
-      this.data.setActiveModalUsingImg(
+      this.data.setActiveModalUsingEmail(
         closestCardAncestor.querySelector(".email").innerText
       );
       this.view.showModal(this.data.currentModalUser);
@@ -62,7 +62,8 @@ class Controller {
 
     if (nextUser) {
       this.view.updateModalInfo(nextUser);
-    }
+      this.data.updateCurrentModalInfo(nextUser);
+        }
   }
 
   handlePreviousUserSelection(event) {
@@ -70,6 +71,7 @@ class Controller {
 
     if (previousUser) {
       this.view.updateModalInfo(previousUser);
+      this.data.updateCurrentModalInfo(previousUser);
     }
   }
 }

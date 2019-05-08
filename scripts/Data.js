@@ -6,7 +6,7 @@ class Data {
     this.filteredUsers = null;
     this.currentModalUser = null;
 
-    this.setActiveModalUsingImg = this.setActiveModalUsingImg.bind(this);
+    this.setActiveModalUsingImg = this.setActiveModalUsingEmail.bind(this);
     this.updateCurrentModalInfo = this.updateCurrentModalInfo.bind(this);
     this.getNextUserInfo = this.getNextUserInfo.bind(this);
     this.getPreviousUserInfo = this.getPreviousUserInfo.bind(this);
@@ -20,10 +20,8 @@ class Data {
     console.log(currentUserImg);
     console.log(currentUserIndex < this.filteredUsers.length ? this.filteredUsers[currentUserIndex + 1] : null);
 
-    if(currentUserIndex < this.filteredUsers.length - 1 ){
-      const nextUser = this.filteredUsers[currentUserIndex + 1];
-      this.currentModalUser = nextUser;
-      return nextUser
+    if(currentUserIndex < this.filteredUsers.length - 1 ){ 
+      return this.filteredUsers[currentUserIndex + 1];
     } 
 
     return null;
@@ -34,9 +32,7 @@ class Data {
     const currentUserIndex = this.filteredUsers.findIndex((user) => user.picture.medium === currentUserImg);
 
     if(currentUserIndex > 0){
-      const previousUser = this.filteredUsers[currentUserIndex - 1];
-      this.currentModalUser = previousUser
-      return previousUser;
+      return this.filteredUsers[currentUserIndex - 1];;
     }
 
     return  null; 
@@ -74,7 +70,7 @@ class Data {
     }
   }
 
-  setActiveModalUsingImg(emailString){
+  setActiveModalUsingEmail(emailString){
     const selectedUser = (this.filteredUsers.filter((user) => user.email === emailString))[0];
     this.updateCurrentModalInfo(selectedUser);
   }
