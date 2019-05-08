@@ -61,17 +61,17 @@ class Controller {
     const nextUser = this.data.getNextUserInfo();
 
     if (nextUser) {
-      this.view.updateModalInfo(nextUser);
-      this.data.updateCurrentModalInfo(nextUser);
-        }
+      this.data.currentModalUser = nextUser;
+      this.view.updateModalInfo(this.data.currentModalUser);
+    }
   }
 
   handlePreviousUserSelection(event) {
     const previousUser = this.data.getPreviousUserInfo();
 
     if (previousUser) {
-      this.view.updateModalInfo(previousUser);
-      this.data.updateCurrentModalInfo(previousUser);
+      this.data.currentModalUser = previousUser;
+      this.view.updateModalInfo(this.data.currentModalUser);
     }
   }
 }

@@ -7,7 +7,6 @@ class Data {
     this.currentModalUser = null;
 
     this.setActiveModalUsingImg = this.setActiveModalUsingEmail.bind(this);
-    this.updateCurrentModalInfo = this.updateCurrentModalInfo.bind(this);
     this.getNextUserInfo = this.getNextUserInfo.bind(this);
     this.getPreviousUserInfo = this.getPreviousUserInfo.bind(this);
   }
@@ -40,10 +39,9 @@ class Data {
   
 
   formatDob(dob) {
-    const birthDate = new Date(dob);
-    console.log(birthDate);
-    return `${birthDate.getMonth()}/${birthDate.getDate()}/${
-      birthDate.getFullYear()
+    console.log(dob);
+    return `${dob[5]+dob[6]}/${dob[8]+dob[9]}/${
+      dob[0] + dob[1] + dob[2] + dob[3]
     }`;
   }
 
@@ -63,6 +61,10 @@ class Data {
     try {
       const response = await fetch(apiEndPoint);
       this.users = await response.json().then(data => data.results);
+      this.users.forEach((user => {
+        user.phone = this.formatPhoneNumber(user.phone);
+        user.dob.date = this.formatDob(user.dob.date);
+      }));
       this.filteredUsers = this.users;
       console.log(this.users);
     } catch (error) {
@@ -72,13 +74,6 @@ class Data {
 
   setActiveModalUsingEmail(emailString){
     const selectedUser = (this.filteredUsers.filter((user) => user.email === emailString))[0];
-    this.updateCurrentModalInfo(selectedUser);
-  }
-
-  updateCurrentModalInfo(user){
-    user.phone = this.formatPhoneNumber(user.phone);
-    user.dob.date = this.formatDob(user.dob.date);
-
-    this.currentModalUser =  user;
+    this.currentModalUser = selectedUser;
   }
 }
