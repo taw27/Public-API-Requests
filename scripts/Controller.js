@@ -17,6 +17,7 @@ class Controller {
     try {
       await this.data.setUsers(numberOfUsers, nationalities);
       this.view.updateUsersOnPage(this.data.users);
+      this.view.appendSearchform();
       this.setEventHandlers();
     } catch (error) {
       throw error;
