@@ -27,8 +27,12 @@ class Controller {
 
   setEventHandlers() {
     this.setModalEvents();
-    this.view.searchContainer.querySelector('#search-submit').addEventListener("click", this.handleSearch);
-    this.view.searchContainer.querySelector('#search-input').addEventListener('keyup', this.handleSearch);
+    this.view.searchContainer
+      .querySelector("#search-submit")
+      .addEventListener("click", this.handleSearch);
+    this.view.searchContainer
+      .querySelector("#search-input")
+      .addEventListener("keyup", this.handleSearch);
   }
 
   setModalEvents() {
@@ -61,13 +65,15 @@ class Controller {
     this.view.hideModal();
   }
 
-  handleSearch(event){
-      event.preventDefault();
-      if(event.target.tagName === 'INPUT'){
-          const searchQuery =  this.view.searchContainer.querySelector('#search-input').value;
-          this.data.filterUsersByName(searchQuery);
-          this.view.filterCards(searchQuery);
-      }
+  handleSearch(event) {
+    event.preventDefault();
+    if (event.target.tagName === "INPUT") {
+      const searchQuery = this.view.searchContainer.querySelector(
+        "#search-input"
+      ).value;
+      this.data.filterUsersByName(searchQuery);
+      this.view.filterCards(searchQuery);
+    }
   }
 
   handleNextUserSelection(event) {

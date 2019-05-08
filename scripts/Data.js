@@ -22,8 +22,6 @@ class Data {
       return this.filteredUsers[currentUserIndex + 1];
     }
 
-    
-
     return null;
   }
 
@@ -42,9 +40,10 @@ class Data {
 
   filterUsersByName(query) {
     console.log(query);
-    this.filteredUsers = this.users.filter(
-      user =>
-        `${user.name.first} ${user.name.last}`.toLowerCase().includes(query.toLowerCase())
+    this.filteredUsers = this.users.filter(user =>
+      `${user.name.first} ${user.name.last}`
+        .toLowerCase()
+        .includes(query.toLowerCase())
     );
     console.log(this.filteredUsers);
   }

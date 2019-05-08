@@ -71,7 +71,7 @@ class View {
       this.galleryContainer.appendChild(card);
     });
 
-    this.cards = document.querySelectorAll('.card');
+    this.cards = document.querySelectorAll(".card");
   }
 
   showModal(user) {
@@ -83,11 +83,13 @@ class View {
     this.modalContainer.style.display = "none";
   }
 
-  filterCards(searchName){
-      Array.from(this.cards).forEach((card) => {
-          const name = card.querySelector('.card-name').innerText.toLowerCase();
-          card.style.display = name.includes(searchName.toLowerCase()) ? "flex" : "none";
-      });
+  filterCards(searchName) {
+    Array.from(this.cards).forEach(card => {
+      const name = card.querySelector(".card-name").innerText.toLowerCase();
+      card.style.display = name.includes(searchName.toLowerCase())
+        ? "flex"
+        : "none";
+    });
   }
 
   updateModalInfo(user) {
