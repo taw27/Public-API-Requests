@@ -1,4 +1,12 @@
+"use strict";
+
+/* 
+    View class to handle all view related changes
+ */
 class View {
+  /* 
+        Constructor that sets the necessary container and element references, and binds relevant methods this
+     */
   constructor() {
     this.galleryContainer = document.querySelector("#gallery");
     this.searchContainer = document.querySelector(".search-container");
@@ -12,6 +20,9 @@ class View {
     this.filterCards = this.filterCards.bind(this);
   }
 
+  /* 
+    Appends the search form to the search container
+   */
   appendSearchform() {
     this.searchContainer.innerHTML = `<form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
@@ -19,6 +30,10 @@ class View {
     </form>`;
   }
 
+  /* 
+  takes in an object with all the user information. Creates a card using the object and appends 
+  it to the gallery div
+ */
   createUserCardElement(user) {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -38,6 +53,9 @@ class View {
     return card;
   }
 
+  /* 
+  creates the modal, appends it to the body and hides it
+   */
   createModalContainerAndHide() {
     const container = document.createElement("div");
     container.classList.add("modal-container");
@@ -65,6 +83,10 @@ class View {
     return document.querySelector("div.modal-container");
   }
 
+  /* 
+    takes in an array of user objects, creates cards for each object, appends them to the gallery div and sets
+    the user card collections to the created cards
+   */
   createUsersOnPage(users) {
     users.forEach(user => {
       const card = this.createUserCardElement(user);
@@ -74,15 +96,24 @@ class View {
     this.cards = document.querySelectorAll(".card");
   }
 
+  /* 
+    takes in a user object and displays the modal for the user
+   */
   showModal(user) {
     this.modalContainer.style.display = "inherit";
     this.updateModalInfo(user);
   }
 
+  /* 
+    hides the user modal
+   */
   hideModal() {
     this.modalContainer.style.display = "none";
   }
 
+  /* 
+    Filters the cards in the display using a searchName and displays the matching cards and hides the rest
+   */
   filterCards(searchName) {
     Array.from(this.cards).forEach(card => {
       const name = card.querySelector(".card-name").innerText.toLowerCase();
@@ -92,6 +123,9 @@ class View {
     });
   }
 
+  /* 
+    takes in a user object and updates the user modal info based on the objects properties
+   */
   updateModalInfo(user) {
     const infoContainer = this.modalContainer.querySelector(
       ".modal-info-container"
