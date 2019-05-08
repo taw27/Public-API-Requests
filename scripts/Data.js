@@ -15,10 +15,6 @@ class Data {
     const currentUserImg = this.currentModalUser.picture.medium;
     const currentUserIndex = this.filteredUsers.findIndex((user) => user.picture.medium === currentUserImg);
 
-    console.log(currentUserIndex );
-    console.log(currentUserImg);
-    console.log(currentUserIndex < this.filteredUsers.length ? this.filteredUsers[currentUserIndex + 1] : null);
-
     if(currentUserIndex < this.filteredUsers.length - 1 ){ 
       return this.filteredUsers[currentUserIndex + 1];
     } 
@@ -39,7 +35,6 @@ class Data {
   
 
   formatDob(dob) {
-    console.log(dob);
     return `${dob[5]+dob[6]}/${dob[8]+dob[9]}/${
       dob[0] + dob[1] + dob[2] + dob[3]
     }`;
@@ -66,7 +61,6 @@ class Data {
         user.dob.date = this.formatDob(user.dob.date);
       }));
       this.filteredUsers = this.users;
-      console.log(this.users);
     } catch (error) {
       throw error;
     }
