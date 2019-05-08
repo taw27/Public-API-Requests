@@ -22,7 +22,7 @@
           <p class="modal-text cap modal-city"> </p>
           <hr>
           <p class="modal-text modal-phone"> </p>
-          <p class="modal-text modal-location"> </p>
+          <p class="modal-text modal-location cap"> </p>
           <p class="modal-text modal-birthday"></p>
       </div>
       
