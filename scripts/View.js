@@ -36,10 +36,10 @@
              <img class="card-img" src=${user.picture.medium} alt="profile picture">
          </div>
          <div class="card-info-container">
-             <h3 id="name" class="card-name cap">${user.name.first} ${
+             <h3 class="card-name cap">${user.name.first} ${
           user.name.last
         }</h3>
-             <p class="card-text">${user.email}</p>
+             <p class="card-text email">${user.email}</p>
              <p class="card-text cap">${user.location.city}, ${
           user.location.state
         }</p>
@@ -68,7 +68,7 @@
           const infoContainer = this.modalContainer.querySelector('.modal-info-container');
           this.removeChildElements(infoContainer);
           const userInfo = ` <img class="modal-img" src=${user.picture.medium} alt="profile picture">
-          <h3 id="name" class="modal-name cap">${user.name.first} ${user.name.last}</h3>
+          <h3 class="modal-name cap">${user.name.first} ${user.name.last}</h3>
           <p class="modal-text">${user.email}</p>
           <p class="modal-text cap">${user.location.city}</p>
           <hr>

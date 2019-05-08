@@ -8,10 +8,44 @@ class Data {
 
     this.setActiveModalUsingImg = this.setActiveModalUsingImg.bind(this);
     this.updateCurrentModalInfo = this.updateCurrentModalInfo.bind(this);
+    this.getNextUserInfo = this.getNextUserInfo.bind(this);
+    this.getPreviousUserInfo = this.getPreviousUserInfo.bind(this);
   }
+
+  getNextUserInfo(){
+    const currentUserImg = this.currentModalUser.picture.medium;
+    const currentUserIndex = this.filteredUsers.findIndex((user) => user.picture.medium === currentUserImg);
+
+    console.log(currentUserIndex );
+    console.log(currentUserImg);
+    console.log(currentUserIndex < this.filteredUsers.length ? this.filteredUsers[currentUserIndex + 1] : null);
+
+    if(currentUserIndex < this.filteredUsers.length - 1 ){
+      const nextUser = this.filteredUsers[currentUserIndex + 1];
+      this.currentModalUser = nextUser;
+      return nextUser
+    } 
+
+    return null;
+  }
+
+  getPreviousUserInfo(){
+    const currentUserImg = this.currentModalUser.picture.medium;
+    const currentUserIndex = this.filteredUsers.findIndex((user) => user.picture.medium === currentUserImg);
+
+    if(currentUserIndex > 0){
+      const previousUser = this.filteredUsers[currentUserIndex - 1];
+      this.currentModalUser = previousUser
+      return previousUser;
+    }
+
+    return  null; 
+  }
+  
 
   formatDob(dob) {
     const birthDate = new Date(dob);
+    console.log(birthDate);
     return `${birthDate.getMonth()}/${birthDate.getDate()}/${
       birthDate.getFullYear()
     }`;
@@ -34,13 +68,14 @@ class Data {
       const response = await fetch(apiEndPoint);
       this.users = await response.json().then(data => data.results);
       this.filteredUsers = this.users;
+      console.log(this.users);
     } catch (error) {
       throw error;
     }
   }
 
-  setActiveModalUsingImg(imgSrcString){
-    const selectedUser = (this.filteredUsers.filter((user) => user.picture.medium === imgSrcString))[0];
+  setActiveModalUsingImg(emailString){
+    const selectedUser = (this.filteredUsers.filter((user) => user.email === emailString))[0];
     this.updateCurrentModalInfo(selectedUser);
   }
 
