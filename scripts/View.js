@@ -60,7 +60,7 @@ class View {
       </div>`;
 
     container.style.display = "none";
-    document.body.insertBefore(container, document.querySelector("script"));
+    document.body.appendChild(container);
 
     return document.querySelector("div.modal-container");
   }
