@@ -16,6 +16,14 @@
         container.innerHTML = `<div class="modal">
           <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
           <div class="modal-info-container">
+          <img class="modal-img" src="" alt="profile picture">
+          <h3 class="modal-name cap"></h3>
+          <p class="modal-text modal-email"> </p>
+          <p class="modal-text cap modal-city"> </p>
+          <hr>
+          <p class="modal-text modal-phone"> </p>
+          <p class="modal-text modal-location"> </p>
+          <p class="modal-text modal-birthday"></p>
       </div>
       
       <div class="modal-btn-container">
@@ -66,17 +74,14 @@
 
       updateModalInfo(user){
           const infoContainer = this.modalContainer.querySelector('.modal-info-container');
-          this.removeChildElements(infoContainer);
-          const userInfo = ` <img class="modal-img" src=${user.picture.medium} alt="profile picture">
-          <h3 class="modal-name cap">${user.name.first} ${user.name.last}</h3>
-          <p class="modal-text">${user.email}</p>
-          <p class="modal-text cap">${user.location.city}</p>
-          <hr>
-          <p class="modal-text">${user.phone}</p>
-          <p class="modal-text">${user.location.street}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
-          <p class="modal-text">Birthday: ${user.dob.date}</p>`;
 
-          infoContainer.innerHTML = userInfo;
+          infoContainer.querySelector('.modal-img').src = user.picture.medium;
+          infoContainer.querySelector('.modal-name').innerText = `${user.name.first} ${user.name.last}`;
+          infoContainer.querySelector('.modal-email').innerText = user.email;
+          infoContainer.querySelector('.modal-city').innerText = user.location.city;
+          infoContainer.querySelector('.modal-phone').innerText = user.phone;
+          infoContainer.querySelector('.modal-location').innerText = `${user.location.street}, ${user.location.city}, ${user.location.state} ${user.location.postcode}`;
+          infoContainer.querySelector('.modal-birthday').innerText = `Birthday: ${user.dob.date}`;
       }
 
       updateUsersOnPage(users) {
