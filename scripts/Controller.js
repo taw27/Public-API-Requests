@@ -31,12 +31,11 @@ class Controller {
   }
 
   handleCardClick(event) {
-    if (
-      event.target.classList.contains("card") ||
-      event.target.classList.contains("card-img-container") ||
-      event.target.classList.contains("card-info-container")
-    ) {
-      this.data.setActiveModalUsingImg(event.target.querySelector("img").src);
+    const closestCardAncestor = event.target.closest(".card");
+    if (closestCardAncestor) {
+      this.data.setActiveModalUsingImg(
+        closestCardAncestor.querySelector("img").src
+      );
       this.view.showModal(this.data.currentModalUser);
     }
   }
