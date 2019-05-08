@@ -66,19 +66,12 @@ class View {
   }
 
   createUsersOnPage(users) {
-    this.removeChildElements(this.galleryContainer);
     users.forEach(user => {
       const card = this.createUserCardElement(user);
       this.galleryContainer.appendChild(card);
     });
 
     this.cards = document.querySelectorAll('.card');
-  }
-
-  removeChildElements(parentContainer) {
-    while (parentContainer.firstChild) {
-      parentContainer.removeChild(parentContainer.firstChild);
-    }
   }
 
   showModal(user) {
