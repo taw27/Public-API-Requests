@@ -13,22 +13,24 @@ class Data {
   }
 
   getNextUserInfo() {
-    const currentUserImg = this.currentModalUser.picture.medium;
+    const currentUserEmail = this.currentModalUser.email;
     const currentUserIndex = this.filteredUsers.findIndex(
-      user => user.picture.medium === currentUserImg
+      user => user.email === currentUserEmail
     );
 
     if (currentUserIndex < this.filteredUsers.length - 1) {
       return this.filteredUsers[currentUserIndex + 1];
     }
 
+    
+
     return null;
   }
 
   getPreviousUserInfo() {
-    const currentUserImg = this.currentModalUser.picture.medium;
+    const currentUserEmail = this.currentModalUser.email;
     const currentUserIndex = this.filteredUsers.findIndex(
-      user => user.picture.medium === currentUserImg
+      user => user.email === currentUserEmail
     );
 
     if (currentUserIndex > 0) {
