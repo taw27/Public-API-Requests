@@ -3,11 +3,39 @@ class View {
     this.galleryContainer = document.querySelector("#gallery");
     this.searchContainer = document.querySelector(".search-container");
     this.modalContainer = this.createModalContainerAndHide();
+    this.cards = [];
 
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.updateModalInfo = this.updateModalInfo.bind(this);
-    this.updateUsersOnPage = this.updateUsersOnPage.bind(this);
+    this.updateUsersOnPage = this.createUsersOnPage.bind(this);
+    this.filterCards = this.filterCards.bind(this);
+  }
+
+  appendSearchform() {
+    this.searchContainer.innerHTML = `<form action="#" method="get">
+        <input type="search" id="search-input" class="search-input" placeholder="Search...">
+        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+    </form>`;
+  }
+
+  createUserCardElement(user) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `<div class="card-img-container">
+             <img class="card-img" src=${
+               user.picture.medium
+             } alt="profile picture">
+         </div>
+         <div class="card-info-container">
+             <h3 class="card-name cap">${user.name.first} ${user.name.last}</h3>
+             <p class="card-text email">${user.email}</p>
+             <p class="card-text cap">${user.location.city}, ${
+      user.location.state
+    }</p>
+         </div>`;
+
+    return card;
   }
 
   createModalContainerAndHide() {
@@ -37,30 +65,14 @@ class View {
     return document.querySelector("div.modal-container");
   }
 
-  appendSearchform() {
-    this.searchContainer.innerHTML = `<form action="#" method="get">
-        <input type="search" id="search-input" class="search-input" placeholder="Search...">
-        <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-    </form>`;
-  }
+  createUsersOnPage(users) {
+    this.removeChildElements(this.galleryContainer);
+    users.forEach(user => {
+      const card = this.createUserCardElement(user);
+      this.galleryContainer.appendChild(card);
+    });
 
-  createUserCardElement(user) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.innerHTML = `<div class="card-img-container">
-             <img class="card-img" src=${
-               user.picture.medium
-             } alt="profile picture">
-         </div>
-         <div class="card-info-container">
-             <h3 class="card-name cap">${user.name.first} ${user.name.last}</h3>
-             <p class="card-text email">${user.email}</p>
-             <p class="card-text cap">${user.location.city}, ${
-      user.location.state
-    }</p>
-         </div>`;
-
-    return card;
+    this.cards = document.querySelectorAll('.card');
   }
 
   removeChildElements(parentContainer) {
@@ -76,6 +88,13 @@ class View {
 
   hideModal() {
     this.modalContainer.style.display = "none";
+  }
+
+  filterCards(searchName){
+      Array.from(this.cards).forEach((card) => {
+          const name = card.querySelector('.card-name').innerText.toLowerCase();
+          card.style.display = name.includes(searchName.toLowerCase()) ? "flex" : "none";
+      });
   }
 
   updateModalInfo(user) {
@@ -96,13 +115,5 @@ class View {
     infoContainer.querySelector(".modal-birthday").innerText = `Birthday: ${
       user.dob.date
     }`;
-  }
-
-  updateUsersOnPage(users) {
-    this.removeChildElements(this.galleryContainer);
-    users.forEach(user => {
-      const card = this.createUserCardElement(user);
-      this.galleryContainer.appendChild(card);
-    });
   }
 }

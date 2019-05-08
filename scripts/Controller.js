@@ -66,7 +66,7 @@ class Controller {
       if(event.target.tagName === 'INPUT'){
           const searchQuery =  this.view.searchContainer.querySelector('#search-input').value;
           this.data.filterUsersByName(searchQuery);
-          this.view.updateUsersOnPage(this.data.filteredUsers);
+          this.view.filterCards(searchQuery);
       }
   }
 
